@@ -10,5 +10,5 @@ source venv/bin/activate
 ## Install the necessary dependencies
 `pip install -r requirements.txt`
 
-
-python -m streamlit run app.py
+## Run the Streamlit Application
+`python -m streamlit run app.py`
