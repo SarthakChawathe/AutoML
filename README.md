@@ -2,7 +2,6 @@
 
 AutoML is a user-friendly application designed to streamline the process of machine learning model development. It empowers users to easily upload datasets, perform exploratory data analysis, and automatically train and evaluate various machine learning models without requiring extensive coding knowledge.
 
-
 ## Key Features
 
 1. Dataset Upload: Simple interface for uploading datasets in CSV format.
@@ -12,6 +11,7 @@ AutoML is a user-friendly application designed to streamline the process of mach
 5. Interactive UI: Built using Streamlit, providing a smooth and responsive user experience.
 
 ## Create a virtual environment
+
 ```
 pip install virtualenv
 python3.10 -m venv venv
@@ -19,7 +19,13 @@ source venv/bin/activate
 ```
 
 ## Install the necessary dependencies
+
 `pip install -r requirements.txt`
 
+## Install libomp
+
+`brew install libomp`
+
 ## Run the Streamlit Application
+
 `python -m streamlit run app.py`
