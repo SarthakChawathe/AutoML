@@ -1,8 +1,8 @@
 from operator import index
 import streamlit as st
 import plotly.express as px
-from pycaret.regression import setup, compare_models, pull, save_model, load_model
-# from pycaret.classification import setup, compare_models, pull, save_model, load_model
+# from pycaret.regression import setup, compare_models, pull, save_model, load_model
+from pycaret.classification import setup, compare_models, pull, save_model, load_model
 # import pandas_profiling
 import pandas as pd
 # from streamlit_pandas_profiling import st_profile_report
@@ -28,12 +28,30 @@ if choice == "Upload":
         df.to_csv('dataset.csv', index=None)
         st.dataframe(df)
 
-if choice == "Profiling": 
+# if choice == "Profiling": 
+#     st.title("Exploratory Data Analysis")
+#     if 'df' in globals():
+#         profile = ProfileReport(df, explorative=True)
+#         profile_html = profile.to_html() 
+#         st.components.v1.html(profile_html, height=1000, scrolling=True) 
+#     else:
+#         st.error("Please upload a dataset first.")
+
+if choice == "Profiling":
     st.title("Exploratory Data Analysis")
+    
     if 'df' in globals():
         profile = ProfileReport(df, explorative=True)
         profile_html = profile.to_html() 
-        st.components.v1.html(profile_html, height=1000, scrolling=True) 
+        st.components.v1.html(profile_html, height=1000, scrolling=True)
+        
+        if st.button("Export report as HTML"):
+            html_output = "profile_report.html"
+            with open(html_output, "w") as f:
+                f.write(profile_html)
+            
+            st.success(f"HTML report saved as {html_output}")
+            st.download_button("Download HTML", data=open(html_output, "r").read(), file_name=html_output)
     else:
         st.error("Please upload a dataset first.")
 
