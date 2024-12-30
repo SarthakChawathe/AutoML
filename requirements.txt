@@ -3,5 +3,4 @@ plotly
 pycaret
 # pandas_profiling
 streamlit_pandas_profiling
-libomp
 ydata-profiling
