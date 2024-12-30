@@ -55,16 +55,42 @@ if choice == "Profiling":
     else:
         st.error("Please upload a dataset first.")
 
+# if choice == "Modelling": 
+#     chosen_target = st.selectbox('Choose the Target Column', df.columns)
+#     if st.button('Run Modelling'): 
+#         setup(df, target=chosen_target)
+#         setup_df = pull()
+#         st.dataframe(setup_df)
+#         best_model = compare_models()
+#         compare_df = pull()
+#         st.dataframe(compare_df)
+#         save_model(best_model, 'best_model')
+
 if choice == "Modelling": 
-    chosen_target = st.selectbox('Choose the Target Column', df.columns)
-    if st.button('Run Modelling'): 
-        setup(df, target=chosen_target)
-        setup_df = pull()
-        st.dataframe(setup_df)
-        best_model = compare_models()
-        compare_df = pull()
-        st.dataframe(compare_df)
-        save_model(best_model, 'best_model')
+    st.title("Select the Type of Analysis")
+    task_type = st.radio("Choose the type of dataset:", ["Regression", "Classification"])
+    
+    if 'df' in globals():
+        chosen_target = st.selectbox('Choose the Target Column', df.columns)
+        
+        if st.button('Run Modelling'): 
+            if task_type == "Classification":
+                from pycaret.classification import setup, compare_models, pull, save_model
+                setup(df, target=chosen_target)
+            elif task_type == "Regression":
+                from pycaret.regression import setup, compare_models, pull, save_model
+                setup(df, target=chosen_target)
+            
+            setup_df = pull()
+            st.dataframe(setup_df)
+            
+            best_model = compare_models()
+            compare_df = pull()
+            st.dataframe(compare_df)
+            
+            save_model(best_model, 'best_model')
+    else:
+        st.error("Please upload a dataset first.")
 
 if choice == "Download": 
     st.title("Download the Best Model")
