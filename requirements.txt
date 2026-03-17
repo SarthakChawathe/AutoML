@@ -2,5 +2,6 @@ setuptools<82
 streamlit
 plotly
 pycaret
-libomp
+# pandas_profiling
+streamlit_pandas_profiling
 ydata-profiling
